@@ -1,29 +1,23 @@
 ﻿function Get-KoanHelp {
     <#
     .SYNOPSIS
-    Get-KoanHelp provides access to more extensive documentation on the koan topics.
-
+        Get-KoanHelp provides access to more extensive documentation on the koan topics.
     .DESCRIPTION
-    Get-KoanHelp calls Get-Help -Online on the koan topic(s) that you specify to provide further assistance and more
-    extensive documentation, should you need it or be interested in it.
-
+        Get-KoanHelp calls Get-Help -Online on the koan topic(s) that you specify to provide further assistance and more
+        extensive documentation, should you need it or be interested in it.
     .PARAMETER Topic
-    Specify one or more topics to query the help pages for.
-
+        Specify one or more topics to query the help pages for.
     .EXAMPLE
-    Get-KoanHelp -Topic AboutArrays
+        Get-KoanHelp -Topic AboutArrays
 
-    Opens the about_Arrays help documentation for you to read through in your default browser.
-
+        Opens the about_Arrays help documentation for you to read through in your default browser.
     .EXAMPLE
-    Get-KoanHelp AboutArrays
+        Get-KoanHelp AboutArrays
 
-    Opens the about_Arrays help documentation in your default browser.
-
+        Opens the about_Arrays help documentation in your default browser.
     .NOTES
-    Only koan files with a preset HelpUri in their [CmdletBinding()] attribute will be functional with this command.
+        Only koan files with a preset HelpUri in their [CmdletBinding()] attribute will be functional with this command.
     #>
-
     [CmdletBinding()]
     param(
         [Parameter(Position = 0, Mandatory, ValueFromPipeline)]
