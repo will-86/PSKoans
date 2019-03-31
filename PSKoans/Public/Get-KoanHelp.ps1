@@ -50,9 +50,24 @@
         }
 
         foreach ($Item in $Topic) {
-            Get-ChildItem -Path $script:ModuleRoot -Filter "${Item}*" -Recurse |
-            Select-Object -First 1 |
-            Get-Help -Online -Name { $_.FullName }
+            try {
+                Get-ChildItem -Path $script:ModuleRoot -Filter "${Item}*" -Recurse |
+                Select-Object -First 1 |
+                Get-Help -Online -Name { $_.FullName } -ErrorAction Stop
+            }
+            catch [System.Management.Automation.PSInvalidOperationException] {
+                $ErrorDetails = @{
+                    ExceptionType    = 'System.Management.Automation.PSInvalidOperationException'
+                    ExceptionMessage = 'Could not find an online HelpUri for the specified Topic(s).'
+                    InnerException   = $_.Exception
+                    ErrorId          = 'PSKoans.NoHelpUri'
+                    ErrorCategory    = 'InvalidOperation'
+                    TargetObject     = $Item -join ','
+                }
+                $ErrorRecord = New-PSKoanErrorRecord @ErrorDetails
+
+                $PSCmdlet.WriteError($ErrorRecord)
+            }
         }
     }
 }
