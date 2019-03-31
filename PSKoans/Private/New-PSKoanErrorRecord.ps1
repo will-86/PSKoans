@@ -67,6 +67,10 @@ function New-PSKoanErrorRecord {
         $Exception,
 
         [Parameter()]
+        [Exception]
+        $InnerException,
+
+        [Parameter()]
         [Alias('Id')]
         [string]
         $ErrorId = 'PSKoans.GenericError',
@@ -82,7 +86,12 @@ function New-PSKoanErrorRecord {
     )
     process {
         if ($PSCmdlet.ParameterSetName -eq 'Default') {
-            $Exception = $ExceptionType::new( $ExceptionMessage )
+            $Exception = if ($InnerException) {
+                $ExceptionType::new( $ExceptionMessage, $InnerException )
+            }
+            else {
+                $ExceptionType::new( $ExceptionMessage )
+            }
         }
 
         [ErrorRecord]::new(
