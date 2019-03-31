@@ -1,4 +1,5 @@
 ﻿using module PSKoans
+[CmdletBinding(HelpUri = 'https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_arrays')]
 [Koan(Position = 105)]
 param()
 <#
