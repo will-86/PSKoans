@@ -26,5 +26,5 @@
 
     Write-Verbose "I AIN'T DOIN' NOTHIN'!!!"
 
-    return [Blank]::New()
+    return [Blank]::new()
 }
